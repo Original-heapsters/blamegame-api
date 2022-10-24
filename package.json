@@ -1,0 +1,27 @@
+{
+  "name": "blamegame-api",
+  "version": "1.0.0",
+  "description": "git hooks based game api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "ava -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Original-heapsters/blamegame-api.git"
+  },
+  "engines": {
+    "node": "19.x"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Original-heapsters/blamegame-api/issues"
+  },
+  "homepage": "https://github.com/Original-heapsters/blamegame-api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
