@@ -10,8 +10,7 @@ const {
 
 let datastoreRedis = null;
 
-async function getRedis() {
-  console.log(`Checking ${datastoreRedis}`);
+function getRedisClient() {
   if (datastoreRedis) {
     return datastoreRedis;
   }
@@ -23,13 +22,25 @@ async function getRedis() {
     // password: REDIS_PWORD,
     db: REDIS_DB,
   });
-  await datastoreRedis.setex('test', 100, 'yomomma');
-  const test = await datastoreRedis.get('test');
-  console.log(test);
 
   return datastoreRedis;
 }
 
+async function getAsync(key) {
+  const client = getRedisClient();
+
+  const value = await client.get(key);
+  return value;
+}
+
+async function setAsync(key, value, ttl = 1000) {
+  const client = getRedisClient();
+
+  await client.setex(key, ttl, value);
+}
+
 module.exports = {
-  getRedis,
+  getRedisClient,
+  getAsync,
+  setAsync,
 };

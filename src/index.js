@@ -1,16 +1,26 @@
 require('dotenv').config({ path: '.env.default' });
 const express = require('express');
-const { redis } = require('./datastores');
+const http = require('http');
+const { Server } = require('socket.io');
 
 const app = express();
+app.use(express.json());
+const server = http.createServer(app);
+const io = new Server(server);
+const { alive } = require('./healthcheck');
+const { signUp } = require('./authentication');
+const { createGame } = require('./games');
+
 const { PORT, HOST } = process.env;
 
 app.get('/', async (req, res) => {
-  console.log('starting');
-  const redisInstance = await redis.getRedis();
-  console.log('got redis');
-  await redisInstance.ping();
   res.send('Hello World!');
 });
 
-app.listen(PORT, HOST);
+app.post('/signUp', signUp);
+
+app.get('/alive', alive);
+
+createGame(io);
+
+server.listen(PORT, HOST);
