@@ -33,3 +33,4 @@ app.get('/', async (req, res) => {
 });
 
 server.listen(PORT, HOST);
+console.log(`Listening on ${HOST}:${PORT}`);
