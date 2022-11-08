@@ -30,13 +30,15 @@ async function getAsync(key) {
   const client = getRedisClient();
 
   const value = await client.get(key);
-  return value;
+  const parsedValue = JSON.parse(value);
+  return parsedValue;
 }
 
 async function setAsync(key, value, ttl = 1000) {
   const client = getRedisClient();
+  const stringifiedValue = JSON.stringify(value);
 
-  await client.setex(key, ttl, value);
+  await client.setex(key, ttl, stringifiedValue);
 }
 
 module.exports = {
