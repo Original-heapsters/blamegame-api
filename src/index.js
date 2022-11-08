@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 const { PORT, HOST } = process.env;
-const allowedOrigins = [`http://${HOST}:${PORT}`];
+const allowedOrigins = [`http://${HOST}:${PORT}`, '*'];
 
 const options = {
   origin: allowedOrigins,
