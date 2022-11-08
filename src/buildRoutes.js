@@ -5,7 +5,7 @@ const { signIn } = require('./authentication/routeHandlers/signIn');
 
 const { updateGame } = require('./games/routeHandlers/updateGame');
 
-async function buildRoutes(app) {
+function buildRoutes(app) {
   app.get('/alive', alive);
 
   app.post('/signUp', signUp);
