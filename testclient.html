@@ -26,6 +26,10 @@
     var socket = io('http://127.0.0.1:3000');
     var form = document.getElementById('form');
     var input = document.getElementById('input');
+    socket.on('testRepo',function(data) {
+      console.log('got event from testRepo:');
+      console.log(data);
+    });
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
