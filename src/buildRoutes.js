@@ -6,11 +6,14 @@ const { signIn } = require('./authentication/routeHandlers/signIn');
 const { updateGame } = require('./games/routeHandlers/updateGame');
 
 function buildRoutes(app) {
+  // Health checks
   app.get('/alive', alive);
 
+  // Authentication
   app.post('/signUp', signUp);
   app.post('/signIn', signIn);
 
+  // Game
   app.patch('/game/:name', updateGame);
 }
 
