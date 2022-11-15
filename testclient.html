@@ -23,7 +23,8 @@
     </form>
   </body>
   <script>
-    var socket = io('http://127.0.0.1:3000');
+    const server = 'http://127.0.0.1:3000';
+    var socket = io(server);
 
     var messages = document.getElementById('messages');
     var form = document.getElementById('form');
@@ -48,7 +49,7 @@
         item.textContent = `${date}| ${player}: ${message}`;
       } else {
         item.textContent = `${date}| ${player}: ${consequence.points}pts ${hook} -> ${consequence.rule} cause - ${consequence.cause}`;
-        var audio = new Audio('http://127.0.0.1:3000/audio/debug.mp3');
+        var audio = new Audio(`${server}${publicAudio}`);
         audio.play();
       }
       messages.appendChild(item);
