@@ -1,4 +1,5 @@
 const { redis } = require('../../datastores');
+
 const baseRules = {
   pre_commit: {
     rule: 'drink',

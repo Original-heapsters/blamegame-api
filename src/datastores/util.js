@@ -10,7 +10,7 @@ function getRandomAudioFile() {
   logger.debug(`AudioDir: ${audioDir}`);
   const files = fs.readdirSync(audioDir);
   const chosenFile = files[Math.floor(Math.random() * files.length)];
-  if (ENABLE_SERVER_SOUND) {
+  if (ENABLE_SERVER_SOUND === true) {
     const localPath = path.join(audioDir, chosenFile);
     logger.debug(`Playing audio at ${localPath}`);
     const player = playSound({});

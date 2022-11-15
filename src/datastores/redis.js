@@ -6,6 +6,8 @@ const {
   // REDIS_UNAME,
   // REDIS_PWORD,
   REDIS_DB,
+  DEFAULT_GAME_TTL,
+  MAX_CHAT_LOG,
 } = process.env;
 
 let datastoreRedis = null;
@@ -57,6 +59,15 @@ async function existsInList(list, item) {
   return exists > 0;
 }
 
+async function pushToLimList(list, item) {
+  const client = getRedisClient();
+  await client.lpush(list, item);
+  if (Math.random() === 10) {
+    await client.ltrim(list, MAX_CHAT_LOG);
+  }
+  await client.expire(list, DEFAULT_GAME_TTL);
+}
+
 module.exports = {
   getRedisClient,
   getAsync,
@@ -64,4 +75,5 @@ module.exports = {
   refreshExpireTime,
   pushToList,
   existsInList,
+  pushToLimList,
 };
