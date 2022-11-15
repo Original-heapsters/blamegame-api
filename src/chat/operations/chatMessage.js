@@ -2,7 +2,7 @@ const { redis } = require('../../datastores');
 const { logger } = require('../../logger');
 
 async function chatMessage(socket) {
-  socket.on('chatMessage', ({ game, user, msg }) => {
+  socket.on('chatMessage', async ({ game, user, msg }) => {
     logger.debug(`${user} sent message in ${game}: ${msg}`);
     const fullMessage = {
       player: user,
@@ -11,7 +11,7 @@ async function chatMessage(socket) {
       date: Date.now(),
     };
 
-    redis.pushToLimList(`games:${game}:chat`, fullMessage);
+    await redis.pushToLimList(`games:${game}:chat`, fullMessage);
 
     socket.emit(game, fullMessage);
   });

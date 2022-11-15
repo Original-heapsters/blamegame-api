@@ -1,11 +1,11 @@
 const { alive } = require('./alive');
-const { checkKey } = require('./checkKey');
-const { checkSet } = require('./checkSet');
+const { checkKey, checkSet, checkList } = require('./redis');
 const { seed } = require('./seed');
 
 module.exports = {
   alive,
   checkKey,
   checkSet,
+  checkList,
   seed,
 };
