@@ -41,8 +41,27 @@ async function setAsync(key, value, ttl = 1000) {
   await client.setex(key, ttl, stringifiedValue);
 }
 
+async function refreshExpireTime(key, ttl = 1000) {
+  const client = getRedisClient();
+  await client.expire(key, ttl);
+}
+
+async function pushToList(key, item) {
+  const client = getRedisClient();
+  await client.sadd(key, item);
+}
+
+async function existsInList(list, item) {
+  const client = getRedisClient();
+  const exists = await client.sismember(list, item);
+  return exists > 0;
+}
+
 module.exports = {
   getRedisClient,
   getAsync,
   setAsync,
+  refreshExpireTime,
+  pushToList,
+  existsInList,
 };
