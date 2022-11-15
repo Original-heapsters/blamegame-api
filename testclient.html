@@ -24,19 +24,43 @@
   </body>
   <script>
     var socket = io('http://127.0.0.1:3000');
+
+    var messages = document.getElementById('messages');
     var form = document.getElementById('form');
     var input = document.getElementById('input');
-    socket.on('blamegame_api',function(data) {
-      console.log('got event from testRepo:');
+    const gameName = 'blamegame_api';
+    const testUser = 'testUser';
+    socket.on(gameName,function(data) {
+      console.log(`got message from ${gameName}:`);
       console.log(data);
+      const {
+        publicAudio = null,
+        player = null,
+        game = null,
+        hook = null,
+        consequence = null,
+        date = null,
+        message = null,
+      } = data;
+
+      var item = document.createElement('li');
+      if (message) {
+        item.textContent = `${date}| ${player}: ${message}`;
+      } else {
+        item.textContent = `${date}| ${player}: ${consequence.points}pts ${hook} -> ${consequence.rule} cause - ${consequence.cause}`;
+        var audio = new Audio('http://127.0.0.1:3000/audio/debug.mp3');
+        audio.play();
+      }
+      messages.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
     });
 
-    socket.emit('join', {game: 'blamegame_api', user: 'testUser'});
+    socket.emit('join', {game: gameName, user: testUser});
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       if (input.value) {
-        socket.emit('chatMessage', {game: 'defaultGame', user: 'defaultUser', msg: input.value});
+        socket.emit('chatMessage', {game: gameName, user: testUser, msg: input.value});
         input.value = '';
       }
     });
