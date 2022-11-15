@@ -23,7 +23,8 @@
     </form>
   </body>
   <script>
-    var socket = io('http://127.0.0.1:3000');
+    const server = 'http://127.0.0.1:3000';
+    var socket = io(server);
 
     var messages = document.getElementById('messages');
     var form = document.getElementById('form');
