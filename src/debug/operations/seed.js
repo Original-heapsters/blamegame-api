@@ -66,6 +66,12 @@ const blamegame = {
   ruleset: baseRules,
 };
 
+const testUser = {
+  username: 'testUser',
+  email: 'testEmail',
+  password: 'nooo',
+};
+
 const testEmails = [
   'test@email.com',
   'sell_nat@yahoo.com',
@@ -76,6 +82,7 @@ async function seed() {
   await redis.setAsync('games:general', generalGame, DEFAULT_GAME_TTL);
   await redis.setAsync('games:blamegame_api', blamegame, DEFAULT_GAME_TTL);
   testEmails.forEach(async (email) => {
+    await redis.setAsync(`players:email:${email}`, testUser, DEFAULT_GAME_TTL);
     await redis.pushToList('games:general:emails', email);
     await redis.pushToList('games:blamegame_api:emails', email);
   });
