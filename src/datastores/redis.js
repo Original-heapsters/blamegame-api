@@ -61,11 +61,18 @@ async function existsInList(list, item) {
 
 async function pushToLimList(list, item) {
   const client = getRedisClient();
-  await client.lpush(list, item);
+  await client.lpush(list, JSON.stringify(item));
   if (Math.random() === 10) {
     await client.ltrim(list, MAX_CHAT_LOG);
   }
   await client.expire(list, DEFAULT_GAME_TTL);
+}
+
+async function getList(list, start = 0, stop = -1) {
+  const client = getRedisClient();
+  const items = await client.lrange(list, start, stop);
+  const parsed = items.map((item) => JSON.parse(item));
+  return parsed;
 }
 
 module.exports = {
@@ -76,4 +83,5 @@ module.exports = {
   pushToList,
   existsInList,
   pushToLimList,
+  getList,
 };

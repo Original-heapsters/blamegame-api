@@ -41,6 +41,7 @@ async function local({
     consequence: ruleset[hookAction],
     date: Date.now(),
   };
+  await redis.pushToLimList(`games:${repoName}:chat`, result);
 
   io.emit(repoName, result);
 

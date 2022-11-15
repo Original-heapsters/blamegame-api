@@ -1,7 +1,6 @@
 const { alive } = require('./debug/routeHandlers/alive');
 const { seed } = require('./debug/routeHandlers/seed');
-const { checkKey } = require('./debug/routeHandlers/checkKey');
-const { checkSet } = require('./debug/routeHandlers/checkSet');
+const { checkKey, checkSet, checkList } = require('./debug/routeHandlers/redis');
 const { signUp } = require('./authentication/routeHandlers/signUp');
 const { signIn } = require('./authentication/routeHandlers/signIn');
 const { local } = require('./hooks/routeHandlers/local');
@@ -13,6 +12,7 @@ function buildRoutes(app) {
   app.get('/debug/seed', seed);
   app.get('/debug/redis/key', checkKey);
   app.get('/debug/redis/set', checkSet);
+  app.get('/debug/redis/list', checkList);
 
   // Authentication
   app.post('/signUp', signUp);

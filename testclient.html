@@ -45,10 +45,13 @@
       } = data;
 
       var item = document.createElement('li');
+      const d = new Date(date);
+      const dateTime = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+                        d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
       if (message) {
-        item.textContent = `${date}| ${player}: ${message}`;
+        item.textContent = `${dateTime}| ${player}: ${message}`;
       } else {
-        item.textContent = `${date}| ${player}: ${consequence.points}pts ${hook} -> ${consequence.rule} cause - ${consequence.cause}`;
+        item.textContent = `${dateTime}| ${player}: ${consequence.points}pts ${hook} -> ${consequence.rule} cause - ${consequence.cause}`;
         var audio = new Audio(`${server}${publicAudio}`);
         audio.play();
       }
@@ -58,9 +61,21 @@
 
     socket.emit('join', {game: gameName, user: testUser});
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       if (input.value) {
+        if(input.value.startsWith('!sound')){
+          await fetch(`${server}/hooks/local`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            mode: 'cors',
+            body: JSON.stringify({
+                "playerEmail":"test@email.com",
+                "repoName":"blamegame_api",
+                "hookAction":"pre_commit"
+            }),
+          });
+        }
         socket.emit('chatMessage', {game: gameName, user: testUser, msg: input.value});
         input.value = '';
       }
