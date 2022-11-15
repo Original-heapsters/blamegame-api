@@ -1,2 +1,2 @@
 # blamegame-api
-git hook based game express api
+git hook based game express api and socketio
