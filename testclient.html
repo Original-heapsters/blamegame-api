@@ -26,7 +26,7 @@
     var socket = io('http://127.0.0.1:3000');
     var form = document.getElementById('form');
     var input = document.getElementById('input');
-    socket.on('testRepo',function(data) {
+    socket.on('blamegame_api',function(data) {
       console.log('got event from testRepo:');
       console.log(data);
     });
