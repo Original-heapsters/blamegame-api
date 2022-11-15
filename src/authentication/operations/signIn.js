@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { redis } = require('../../datastores');
 
-const { TOKEN_KEY, DEFAULT_TOKEN_TTL } = process.env;
+const { TOKEN_KEY, DEFAULT_TOKEN_TTL, DEFAULT_USER_TTL } = process.env;
 
 async function signIn({ username, email, password }) {
   if (!username) {
@@ -17,7 +17,7 @@ async function signIn({ username, email, password }) {
     return { error: 'Password is required' };
   }
 
-  const existingUser = await redis.getAsync(`users:${username}`);
+  const existingUser = await redis.getAsync(`players:email:${email}`);
   if (!existingUser) {
     return { error: 'Registered account not found' };
   }
@@ -30,6 +30,7 @@ async function signIn({ username, email, password }) {
       { expiresIn: DEFAULT_TOKEN_TTL },
     );
     existingUser.token = token;
+    await redis.refreshExpireTime(`players:email:${email}`, DEFAULT_USER_TTL);
     return { user: existingUser };
   }
   return { info: 'Invalid credentials' };

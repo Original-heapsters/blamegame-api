@@ -17,7 +17,7 @@ async function signUp({ username, email, password }) {
     return { error: 'Password is required' };
   }
 
-  const existingUser = await redis.getAsync(`users:${username}`);
+  const existingUser = await redis.getAsync(`players:email:${email}`);
 
   if (existingUser) {
     return { error: 'User already exists. Login instead' };
@@ -31,7 +31,8 @@ async function signUp({ username, email, password }) {
     password: encryptedPass,
   };
 
-  await redis.setAsync(`users:${username}`, newUser, DEFAULT_USER_TTL);
+  await redis.setAsync(`players:email:${email}`, newUser, DEFAULT_USER_TTL);
+  await redis.pushToList('games:general:emails', email);
 
   const token = jwt.sign(
     { username, email },
