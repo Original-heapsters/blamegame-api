@@ -6,6 +6,7 @@ async function local(req, res) {
   const result = await operations.local({ ...req.body, io });
   if ('error' in result) {
     logger.error(`Local hook error: ${result.error}`);
+    console.log(req.body);
   }
 
   return res.json(result);
