@@ -31,6 +31,8 @@
       console.log(data);
     });
 
+    socket.emit('join', {game: 'blamegame_api', user: 'testUser'});
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       if (input.value) {
