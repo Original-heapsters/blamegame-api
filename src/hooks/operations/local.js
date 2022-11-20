@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const { redis, util } = require('../../datastores');
 
 async function local({
@@ -34,6 +35,8 @@ async function local({
   } = util.getRandomAudioFile();
 
   const result = {
+    id: uuidv4(),
+    type: 'hook',
     publicAudio: externalAudioPath,
     player: user.username,
     game: repoName,

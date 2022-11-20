@@ -1,8 +1,11 @@
+const { v4: uuidv4 } = require('uuid');
 const { redis } = require('../../datastores');
 
 async function joinGame(socket) {
   socket.on('join', async ({ game, user }) => {
     const fullMessage = {
+      id: uuidv4(),
+      type: 'chat',
       player: user,
       game,
       message: `${user} joined ${game}`,
