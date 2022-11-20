@@ -9,7 +9,7 @@ const { buildRoutes } = require('./buildRoutes');
 const { buildSockets } = require('./buildSockets');
 
 const { PORT, HOST } = process.env;
-const allowedOrigins = [`http://${HOST}:${PORT}`, '*', 'null'];
+const allowedOrigins = [`http://${HOST}:${PORT}`, '*', 'null', 'http://localhost:3001'];
 const options = {
   origin: allowedOrigins,
 };

@@ -1,0 +1,8 @@
+#!/bin/sh
+SERVERLOCATION=http://localhost:3000/hooks/local
+GITUEMAIL=$(git config --global user.email)
+GITACTION=$(basename $0 | tr '-' '_')
+REPO_NAME=$(basename "$PWD" | tr '-' '_')
+JSON_FMT='{"playerEmail":"%s","hookAction":"%s", "repoName":"%s"}\n'
+PAYLOAD=$(printf "$JSON_FMT" "$GITUEMAIL" "$GITACTION" "$REPO_NAME")
+curl $SERVERLOCATION -H "Content-Type: application/json" -s -d "$PAYLOAD" > /dev/null

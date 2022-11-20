@@ -3,6 +3,7 @@ const { seed } = require('./debug/routeHandlers/seed');
 const { checkKey, checkSet, checkList } = require('./debug/routeHandlers/redis');
 const { signUp } = require('./authentication/routeHandlers/signUp');
 const { signIn } = require('./authentication/routeHandlers/signIn');
+const { getChatHistory } = require('./chat/routeHandlers/getChatHistory');
 const { local } = require('./hooks/routeHandlers/local');
 const { updateGame } = require('./games/routeHandlers/updateGame');
 
@@ -20,6 +21,9 @@ function buildRoutes(app) {
 
   // Game
   app.patch('/game/:name', updateGame);
+
+  // Chat
+  app.get('/game/:name/chat', getChatHistory);
 
   // Hook processing
   app.post('/hooks/local', local);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev-env-up": "docker run -d --name blamegame -p 6379:6379 redis:latest",
+    "dev-env-up": "docker run -d --name blamegame -p 6379:6379 redis:latest || docker container restart blamegame",
     "test": "ava -v",
     "lint": "eslint ./src/**/*.js",
     "lint-fix": "eslint --fix ./src/**/*.js"
@@ -32,6 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "play-sound": "^1.1.5",
     "socket.io": "^4.5.3",
+    "uuid": "^9.0.0",
     "winston": "^3.8.2"
   },
   "devDependencies": {
