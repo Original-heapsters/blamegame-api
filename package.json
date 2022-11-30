@@ -31,7 +31,7 @@
     "ioredis": "^5.2.4",
     "jsonwebtoken": "^8.5.1",
     "play-sound": "^1.1.5",
-    "socket.io": "^4.5.3",
+    "socket.io": "^4.5.4",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
   },
