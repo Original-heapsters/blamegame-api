@@ -75,6 +75,12 @@ async function getList(list, start = 0, stop = -1) {
   return parsed;
 }
 
+async function getKeysUnderPrefix(prefix) {
+  const client = getRedisClient();
+  const items = await client.keys(prefix);
+  return items;
+}
+
 module.exports = {
   getRedisClient,
   getAsync,
@@ -84,4 +90,5 @@ module.exports = {
   existsInList,
   pushToLimList,
   getList,
+  getKeysUnderPrefix,
 };
