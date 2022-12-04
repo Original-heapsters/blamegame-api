@@ -116,9 +116,9 @@ async function seed() {
   await redis.setAsync('games:general', generalGame, DEFAULT_GAME_TTL);
   await redis.setAsync('games:blamegame_api', blamegame, DEFAULT_GAME_TTL);
   await redis.pushToLimList('games:general:chat', sampleHookMessage);
-  await redis.pushToLimList('games:blameGame:chat', sampleHookMessage);
+  await redis.pushToLimList('games:blameGame_api:chat', sampleHookMessage);
   await redis.pushToLimList('games:general:chat', sampleGeneralChatMessage);
-  await redis.pushToLimList('games:blameGame:chat', sampleBGChatMessage);
+  await redis.pushToLimList('games:blameGame_api:chat', sampleBGChatMessage);
   testEmails.forEach(async (email) => {
     await redis.setAsync(`players:email:${email}`, testUser, DEFAULT_GAME_TTL);
     await redis.pushToList('games:general:emails', email);
