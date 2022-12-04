@@ -6,6 +6,7 @@ const { signIn } = require('./authentication/routeHandlers/signIn');
 const { getChatHistory } = require('./chat/routeHandlers/getChatHistory');
 const { local } = require('./hooks/routeHandlers/local');
 const { updateGame } = require('./games/routeHandlers/updateGame');
+const { getGames } = require('./games/routeHandlers/getGames');
 
 function buildRoutes(app) {
   // Health checks
@@ -20,6 +21,7 @@ function buildRoutes(app) {
   app.post('/signIn', signIn);
 
   // Game
+  app.get('/games', getGames);
   app.patch('/game/:name', updateGame);
 
   // Chat
