@@ -9,7 +9,7 @@ const { buildRoutes } = require('./buildRoutes');
 const { buildSockets } = require('./buildSockets');
 
 const { PORT, HOST } = process.env;
-const allowedOrigins = [`http://${HOST}:${PORT}`, '*', 'null', 'http://localhost:3001', 'https://original-heapsters.github.io'];
+const allowedOrigins = [`http://${HOST}:${PORT}`, '*', 'null', 'http://localhost:3001', 'http://localhost:3000', 'https://original-heapsters.github.io'];
 const options = {
   origin: allowedOrigins,
 };
