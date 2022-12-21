@@ -36,6 +36,12 @@ async function getAsync(key) {
   return parsedValue;
 }
 
+async function wipeKeys() {
+  const client = getRedisClient();
+
+  await client.flushall();
+}
+
 async function setAsync(key, value, ttl = 1000) {
   const client = getRedisClient();
   const stringifiedValue = JSON.stringify(value);
@@ -91,4 +97,5 @@ module.exports = {
   pushToLimList,
   getList,
   getKeysUnderPrefix,
+  wipeKeys,
 };

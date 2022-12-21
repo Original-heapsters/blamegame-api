@@ -113,6 +113,7 @@ const sampleGeneralChatMessage = {
 
 const { DEFAULT_GAME_TTL } = process.env;
 async function seed() {
+  await redis.wipeKeys();
   await redis.setAsync('games:general', generalGame, DEFAULT_GAME_TTL);
   await redis.setAsync('games:blamegame_api', blamegame, DEFAULT_GAME_TTL);
   await redis.pushToLimList('games:general:chat', sampleHookMessage);
