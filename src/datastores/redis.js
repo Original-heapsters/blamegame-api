@@ -59,6 +59,12 @@ async function pushToList(key, item) {
   await client.sadd(key, item);
 }
 
+async function getMembers(list) {
+  const client = getRedisClient();
+  const items = await client.smembers(list);
+  return items;
+}
+
 async function existsInList(list, item) {
   const client = getRedisClient();
   const exists = await client.sismember(list, item);
@@ -96,6 +102,7 @@ module.exports = {
   existsInList,
   pushToLimList,
   getList,
+  getMembers,
   getKeysUnderPrefix,
   wipeKeys,
 };
