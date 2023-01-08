@@ -9,54 +9,54 @@ const baseRules = {
   },
   prepare_commit_msg: {
     rule: 'drink',
-    points: 1,
+    points: 2,
     cause: 'Runs before commit editor opens and after default message is created',
   },
   commit_msg: {
     rule: 'drink',
-    points: 1,
+    points: 3,
     cause: 'Runs when commit message opens',
   },
   post_commit: {
     rule: 'drink',
-    points: 1,
+    points: 4,
     cause: 'Runs after commit process',
   },
   applypatch_msg: {
     rule: 'drink',
-    points: 1,
+    points: 5,
   },
   pre_applypatch: {
     rule: 'drink',
-    points: 1,
+    points: 6,
   },
   post_applypatch: {
     rule: 'drink',
-    points: 1,
+    points: 7,
   },
   pre_rebase: {
     rule: 'drink',
-    points: 1,
+    points: 8,
   },
-  post_reqrite: {
+  post_rewrite: {
     rule: 'drink',
-    points: 1,
+    points: 9,
   },
   post_checkout: {
     rule: 'drink',
-    points: 1,
+    points: 10,
   },
   post_merge: {
     rule: 'drink',
-    points: 1,
+    points: 11,
   },
   pre_push: {
     rule: 'drink',
-    points: 1,
+    points: 12,
   },
   pre_auto_gc: {
     rule: 'drink',
-    points: 1,
+    points: 13,
   },
 };
 
@@ -71,7 +71,7 @@ const blamegame = {
 const testUser = {
   username: 'testUser',
   email: 'testEmail',
-  password: 'nooo',
+  password: 'test',
 };
 
 const testEmails = [
@@ -87,7 +87,7 @@ const sampleHookMessage = {
   game: 'blamegame_api',
   consequence: {
     rule: 'drink',
-    points: 1,
+    points: 3,
     cause: 'Runs when commit message opens',
   },
   hook: 'commit_msg',
