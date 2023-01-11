@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const { redis } = require('../../datastores');
 
-async function leaveGame(socket) {
+async function leaveGame(socket, io) {
   socket.on('leave', async ({ game, user }) => {
     const fullMessage = {
       id: uuidv4(),
@@ -13,9 +13,8 @@ async function leaveGame(socket) {
     };
 
     await redis.pushToLimList(`games:${game}:chat`, fullMessage);
-    socket.emit(game, fullMessage);
+    io.emit(game, fullMessage);
     socket.leave(game);
-    console.log('left');
   });
 }
 

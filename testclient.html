@@ -29,7 +29,7 @@
     var messages = document.getElementById('messages');
     var form = document.getElementById('form');
     var input = document.getElementById('input');
-    const gameName = 'blamegame_api';
+    const gameName = 'general';
     const testUser = 'testUser';
     socket.on(gameName,function(data) {
       console.log(`got message from ${gameName}:`);
@@ -78,7 +78,6 @@
         }
         socket.emit('chatMessage', {game: gameName, user: testUser, msg: input.value});
         input.value = '';
-        socket.emit('leave', {game: gameName, user: testUser});
       }
     });
   </script>
