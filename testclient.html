@@ -78,6 +78,7 @@
         }
         socket.emit('chatMessage', {game: gameName, user: testUser, msg: input.value});
         input.value = '';
+        socket.emit('leave', {game: gameName, user: testUser});
       }
     });
   </script>
