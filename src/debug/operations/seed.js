@@ -3,60 +3,69 @@ const { redis, util } = require('../../datastores');
 
 const baseRules = {
   pre_commit: {
-    rule: 'drink',
+    rule: 'Sip water',
     points: 1,
-    cause: 'First hook before commit process starts',
+    cause: 'The pre-commit hook is run first, before you even type in a commit message.',
   },
   prepare_commit_msg: {
-    rule: 'drink',
+    rule: 'Sip water x2',
     points: 2,
-    cause: 'Runs before commit editor opens and after default message is created',
+    cause: 'The prepare-commit-msg hook is run before the commit message editor is fired up but after the default message is created.',
   },
   commit_msg: {
-    rule: 'drink',
+    rule: 'Sip water x3',
     points: 3,
-    cause: 'Runs when commit message opens',
+    cause: 'The commit-msg hook takes one parameter, which again is the path to a temporary file that contains the commit message written by the developer.',
   },
   post_commit: {
-    rule: 'drink',
+    rule: 'Drink of relief',
     points: 4,
-    cause: 'Runs after commit process',
+    cause: 'After the entire commit process is completed, the post-commit hook runs.',
   },
   applypatch_msg: {
-    rule: 'drink',
+    rule: 'Sip water',
     points: 5,
+    cause: 'The first hook that is run in the email workflow is applypatch-msg.',
   },
   pre_applypatch: {
-    rule: 'drink',
+    rule: 'Sip water x2',
     points: 6,
+    cause: 'The next hook to run when applying patches via git am is pre-applypatch.',
   },
   post_applypatch: {
-    rule: 'drink',
+    rule: 'Big drink',
     points: 7,
+    cause: 'The last hook to run during a git am operation is post-applypatch, which runs after the commit is made.',
   },
   pre_rebase: {
-    rule: 'drink',
+    rule: 'Sip water',
     points: 8,
+    cause: 'The pre-rebase hook runs before you rebase anything and can halt the process by exiting non-zero.',
   },
   post_rewrite: {
-    rule: 'drink',
+    rule: 'Take a shot',
     points: 9,
+    cause: 'The post-rewrite hook is run by commands that replace commits, such as git commit --amend and git rebase.',
   },
   post_checkout: {
-    rule: 'drink',
+    rule: 'Finish drink',
     points: 10,
+    cause: 'After you run a successful git checkout, the post-checkout hook runs.',
   },
   post_merge: {
-    rule: 'drink',
+    rule: 'Take a shot',
     points: 11,
+    cause: 'The post-merge hook runs after a successful merge command.',
   },
   pre_push: {
-    rule: 'drink',
+    rule: 'Sip water in anticipation',
     points: 12,
+    cause: 'The pre-push hook runs during git push, after the remote refs have been updated but before any objects have been transferred.',
   },
   pre_auto_gc: {
-    rule: 'drink',
+    rule: 'Lil sip',
     points: 13,
+    cause: 'Git occasionally does garbage collection as part of its normal operation, by invoking git gc --auto. The pre-auto-gc hook is invoked just before the garbage collection takes place, and can be used to notify you that this is happening, or to abort the collection if now isn’t a good time.',
   },
 };
 
