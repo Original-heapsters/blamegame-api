@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const { redis } = require('../../datastores');
 const { logger } = require('../../logger');
 
-async function chatMessage(socket) {
+async function chatMessage(socket, io) {
   socket.on('chatMessage', async ({ game, user, msg }) => {
     logger.debug(`${user} sent message in ${game}: ${msg}`);
     const fullMessage = {
@@ -15,8 +15,8 @@ async function chatMessage(socket) {
     };
 
     await redis.pushToLimList(`games:${game}:chat`, fullMessage);
-
-    socket.emit(game, fullMessage);
+    logger.debug(`Emitting ${JSON.stringify(fullMessage)} to ${game}`);
+    io.emit(game, fullMessage);
   });
 }
 
