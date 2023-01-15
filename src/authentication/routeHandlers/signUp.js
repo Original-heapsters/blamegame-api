@@ -7,6 +7,10 @@ async function signUp(req, res) {
     logger.error(`Sign up error: ${result.error}`);
   }
 
+  const { token } = result;
+
+  res.cookie('token', token, { maxAge: 1000 * 60 * 10, httpOnly: false });
+
   return res.json(result);
 }
 

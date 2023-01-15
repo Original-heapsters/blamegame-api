@@ -12,6 +12,7 @@ const { PORT, HOST } = process.env;
 const allowedOrigins = [`http://${HOST}:${PORT}`, '*', 'null', 'http://localhost:3001', 'http://localhost:3000', 'https://original-heapsters.github.io'];
 const options = {
   origin: allowedOrigins,
+  credentials: true,
 };
 
 const app = express();
