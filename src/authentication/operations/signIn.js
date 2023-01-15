@@ -31,7 +31,7 @@ async function signIn({ username, email, password }) {
     );
     existingUser.token = token;
     await redis.refreshExpireTime(`players:email:${email}`, DEFAULT_USER_TTL);
-    return { user: existingUser };
+    return existingUser;
   }
   return { info: 'Invalid credentials' };
 }
