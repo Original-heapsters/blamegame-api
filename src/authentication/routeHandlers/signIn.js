@@ -10,7 +10,7 @@ async function signIn(req, res) {
   const { token } = result;
 
   if (token) {
-    res.cookie('token', token, { maxAge: 1000 * 60 * 10, httpOnly: false });
+    res.cookie('token', token, { maxAge: 1000 * 60 * 10, httpOnly: false, sameSite: 'none', secure: true });
   }
 
   return res.json(result);
