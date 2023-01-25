@@ -10,7 +10,8 @@ async function signUp(req, res) {
   const { token } = result;
 
   if (token) {
-    res.cookie('token', token, { maxAge: 1000 * 60 * 10, httpOnly: false, sameSite: 'none', secure: true });
+    const oneWeek = 7 * 24 * 3600 * 1000;
+    res.cookie('token', token, { expires: new Date(Date.now() + oneWeek), maxAge: oneWeek, httpOnly: false, sameSite: 'none', secure: true });
   }
 
   return res.json(result);
