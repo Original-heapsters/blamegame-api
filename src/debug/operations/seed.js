@@ -81,6 +81,7 @@ const testUser = {
   username: 'testUser',
   email: 'testEmail',
   password: 'test',
+  profileUrl: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp'
 };
 
 const testEmails = [
