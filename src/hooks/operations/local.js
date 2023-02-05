@@ -39,6 +39,7 @@ async function local({
     type: 'hook',
     publicAudio: externalAudioPath,
     player: user.username,
+    profileUrl: user.profileUrl,
     game: repoName,
     hook: hookAction,
     consequence: ruleset[hookAction],

@@ -3,12 +3,13 @@ const { redis } = require('../../datastores');
 const { logger } = require('../../logger');
 
 async function chatMessage(socket, io) {
-  socket.on('chatMessage', async ({ game, user, msg }) => {
+  socket.on('chatMessage', async ({ game, user, profileUrl, msg }) => {
     logger.debug(`${user} sent message in ${game}: ${msg}`);
     const fullMessage = {
       id: uuidv4(),
       type: 'chat',
       player: user,
+      profileUrl: profileUrl,
       game,
       message: msg,
       date: Date.now(),
