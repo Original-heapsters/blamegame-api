@@ -13,6 +13,7 @@ const allowedOrigins = [`http://${HOST}:${PORT}`, '*', 'null', 'http://localhost
 const options = {
   origin: allowedOrigins,
   credentials: true,
+  exposedHeaders: ["set-cookie"],
 };
 
 const app = express();
