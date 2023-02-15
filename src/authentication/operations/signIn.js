@@ -4,10 +4,7 @@ const { redis } = require('../../datastores');
 
 const { TOKEN_KEY, DEFAULT_TOKEN_TTL, DEFAULT_USER_TTL } = process.env;
 
-async function signIn({ username, email, password }) {
-  if (!username) {
-    return { error: 'Username is required' };
-  }
+async function signIn({ email, password }) {
 
   if (!email) {
     return { error: 'Email is required' };
@@ -25,7 +22,7 @@ async function signIn({ username, email, password }) {
   const passMatch = await bcrypt.compare(password, passHash);
   if (existingUser && passMatch) {
     const token = jwt.sign(
-      { username, email, profileUrl: existingUser.profileUrl },
+      { username: existingUser.username, email, profileUrl: existingUser.profileUrl },
       TOKEN_KEY,
       { expiresIn: DEFAULT_TOKEN_TTL },
     );
