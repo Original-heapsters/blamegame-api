@@ -25,7 +25,7 @@ async function signIn({ username, email, password }) {
   const passMatch = await bcrypt.compare(password, passHash);
   if (existingUser && passMatch) {
     const token = jwt.sign(
-      { username, email },
+      { username, email, profileUrl: existingUser.profileUrl },
       TOKEN_KEY,
       { expiresIn: DEFAULT_TOKEN_TTL },
     );

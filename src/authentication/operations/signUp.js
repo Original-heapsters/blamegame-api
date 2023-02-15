@@ -40,7 +40,7 @@ async function signUp({ username, email, password, profileUrl }) {
   await redis.pushToList('games:general:emails', email);
 
   const token = jwt.sign(
-    { username, email },
+    { username, email, profileUrl },
     TOKEN_KEY,
     { expiresIn: DEFAULT_TOKEN_TTL },
   );
