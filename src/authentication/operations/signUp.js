@@ -4,7 +4,7 @@ const { redis } = require('../../datastores');
 
 const { DEFAULT_USER_TTL, TOKEN_KEY, DEFAULT_TOKEN_TTL } = process.env;
 
-async function signUp({ username, email, password }) {
+async function signUp({ username, email, password, profileUrl }) {
   if (!username) {
     return { error: 'Username is required' };
   }
@@ -15,6 +15,10 @@ async function signUp({ username, email, password }) {
 
   if (!password) {
     return { error: 'Password is required' };
+  }
+
+  if (!profileUrl) {
+    return { error: 'Profile Url is required' };
   }
 
   const existingUser = await redis.getAsync(`players:email:${email}`);
@@ -29,6 +33,7 @@ async function signUp({ username, email, password }) {
     username,
     email,
     password: encryptedPass,
+    profileUrl,
   };
 
   await redis.setAsync(`players:email:${email}`, newUser, DEFAULT_USER_TTL);
